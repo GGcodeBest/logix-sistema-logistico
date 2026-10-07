@@ -619,5 +619,28 @@
     <div id="toast" class="toast">Mensagem do sistema</div>
 
     <script src="script.js"></script>
+    <!-- Scripts do Firebase (versão compatível para navegador) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Configuração extraída da sua imagem do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDznGZLShAE59FbVN1CO0RmRlpc09VoqJo",
+    authDomain: "logix-sistema-logistico.firebaseapp.com",
+    projectId: "logix-sistema-logistico",
+    storageBucket: "logix-sistema-logistico.firebasestorage.app",
+    messagingSenderId: "953369379696",
+    appId: "1:953369379696:web:4eded184a96366b27285b5",
+    measurementId: "G-CD92LZXHPT"
+  };
+
+  // Inicializa o Firebase e a base de dados Firestore
+  firebase.initializeApp(firebaseConfig);
+  window.db = firebase.firestore();
+</script>
+
+<!-- O seu script principal (deve vir DEPOIS das configurações do Firebase) -->
+<script src="script.js"></script>
 </body>
 </html>
