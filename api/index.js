@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATA_FILE = path.join(__dirname, 'data.json');
+let inMemoryData = null;
 
 app.use(cors());
 app.use(express.json());
@@ -55,17 +55,17 @@ const defaultData = {
     ]
 };
 
+function writeData(data) {
+  inMemoryData = data;
+  return true;
+}
+
+
 function readData() {
-    if (!fs.existsSync(DATA_FILE)) {
-        fs.writeFileSync(DATA_FILE, JSON.stringify(defaultData, null, 2));
-        return defaultData;
-    }
-    try {
-        const raw = fs.readFileSync(DATA_FILE);
-        return JSON.parse(raw);
-    } catch (err) {
-        return defaultData;
-    }
+  if (!inMemoryData) {
+    inMemoryData = JSON.parse(JSON.stringify(defaultData));
+  }
+  return inMemoryData;
 }
 
 function saveData(data) {
