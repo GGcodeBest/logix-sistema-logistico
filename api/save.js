@@ -1,7 +1,8 @@
 // Rota para LER os dados da base de dados
+// Rota para LER os dados do Supabase
 app.get('/api/data', async (req, res) => {
   try {
-    const { data, error } = await supabase.from('app_data').select('*').single();
+    const { data, error } = await supabase.from('app_data').select('content').eq('id', 1).single();
     if (error && error.code !== 'PGRST116') throw error;
     
     return res.json(data ? data.content : defaultData);
@@ -10,7 +11,7 @@ app.get('/api/data', async (req, res) => {
   }
 });
 
-// Rota para SALVAR os dados na base de dados
+// Rota para SALVAR os dados no Supabase
 app.post('/api/save', async (req, res) => {
   try {
     const bodyData = req.body;
