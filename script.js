@@ -693,3 +693,29 @@ function showToast(mensagem) {
     toast.style.display = 'block';
     setTimeout(() => { toast.style.display = 'none'; }, 3000);
 }
+// Função para carregar os dados ao abrir a página
+async function loadData() {
+  try {
+    const response = await fetch('/api/data');
+    if (!response.ok) throw new Error('Erro ao buscar dados');
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error('Erro ao carregar do servidor:', err);
+  }
+}
+
+// Função para enviar os dados quando algo for adicionado/alterado
+async function saveData(appData) {
+  try {
+    const response = await fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(appData)
+    });
+    if (!response.ok) throw new Error('Erro ao salvar dados');
+    console.log('Dados salvos no Supabase com sucesso!');
+  } catch (err) {
+    console.error('Erro ao salvar no servidor:', err);
+  }
+}

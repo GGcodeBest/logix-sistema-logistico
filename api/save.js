@@ -1,4 +1,3 @@
-// Rota para LER os dados da base de dados
 // Rota para LER os dados do Supabase
 app.get('/api/data', async (req, res) => {
   try {
